@@ -12,9 +12,10 @@ import { HomeComponent } from './component/home/home.component';
 import { EpisodiosComponent } from './component/episodios/episodios.component';
 import { LocationsComponent } from './component/locations/locations.component';
 import { InicioComponent } from './component/inicio/inicio.component';
+import { DetailLocationComponent } from './component/detail-location/detail-location.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, DetailComponent, HomeComponent, EpisodiosComponent, LocationsComponent, InicioComponent],
+  declarations: [AppComponent, HeaderComponent, DetailComponent, HomeComponent, EpisodiosComponent, LocationsComponent, InicioComponent, DetailLocationComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

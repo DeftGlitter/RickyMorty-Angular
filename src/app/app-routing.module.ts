@@ -5,14 +5,15 @@ import { DetailComponent } from './component/detail/detail.component';
 import { EpisodiosComponent } from './component/episodios/episodios.component';
 import { LocationsComponent } from './component/locations/locations.component';
 import { InicioComponent } from './component/inicio/inicio.component';
+import { DetailLocationComponent } from './component/detail-location/detail-location.component';
 
 const appRoutes: Routes = [
-  { path: 'Inicio', component: InicioComponent },
-  { path: '', component: HomeComponent },
+  { path: '', component: InicioComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'detail', component: DetailComponent },
   { path: 'episodios', component: EpisodiosComponent },
   { path: 'location', component: LocationsComponent },
-  // { path: 'actualiza/:id', component:  },
+  { path: 'detailLocation', component: DetailLocationComponent },
   // { path: 'login', component:  },
   // { path: '**', component: ErrorPersonalizadoComponent },
 ];

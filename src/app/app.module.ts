@@ -11,9 +11,10 @@ import { DetailComponent } from './component/detail/detail.component';
 import { HomeComponent } from './component/home/home.component';
 import { EpisodiosComponent } from './component/episodios/episodios.component';
 import { LocationsComponent } from './component/locations/locations.component';
+import { InicioComponent } from './component/inicio/inicio.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, DetailComponent, HomeComponent, EpisodiosComponent, LocationsComponent],
+  declarations: [AppComponent, HeaderComponent, DetailComponent, HomeComponent, EpisodiosComponent, LocationsComponent, InicioComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

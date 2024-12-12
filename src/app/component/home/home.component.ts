@@ -11,6 +11,7 @@ import { RestService } from 'src/app/service/rest.service';
 export class HomeComponent implements OnInit {
   constructor(private restService: RestService, private router: Router) {}
 
+  cargando: Boolean = false;
   personajes: Result[] = [];
   getAll() {
     this.restService.getAll().subscribe((response: IPersonajes) => {
@@ -24,5 +25,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+    this.cargando = true;
   }
 }

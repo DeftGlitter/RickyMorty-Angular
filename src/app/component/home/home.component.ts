@@ -24,7 +24,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll();
-    this.cargando = true;
+    setTimeout(() => {
+      this.cargando = true;
+      this.getAll(); // Aquí simula obtener datos
+    }, 1500); // Tiempo en milisegundos (3 segundos)
   }
 }

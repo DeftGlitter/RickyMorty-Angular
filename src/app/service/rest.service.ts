@@ -14,9 +14,14 @@ export class RestService {
   private localUrl: string = 'https://rickandmortyapi.com/api/location';
   constructor(private httpClient: HttpClient) {}
 
-  //Peticion personajes
-  getAll(): Observable<IPersonajes> {
-    return this.httpClient.get<IPersonajes>(this.baseUrl);
+  // //Peticion personajes
+  // getAll(): Observable<IPersonajes> {
+  //   return this.httpClient.get<IPersonajes>(this.baseUrl);
+  // }
+
+  // //Peticion personajes
+  getAll(url: string): Observable<IPersonajes> {
+    return this.httpClient.get<IPersonajes>(url);
   }
 
   //Peticion detalles de personaje

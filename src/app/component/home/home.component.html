@@ -1,3 +1,31 @@
+<div
+  class="container d-flex flex-row justify-content-center align-items-center p-4"
+>
+  <button
+    class="btn btn-dark m-2"
+    (click)="cambiarPagina('prev')"
+    [disabled]="!prev"
+  >
+    Anterior
+  </button>
+  <select
+    name="pageselect"
+    id="pageselect"
+    class="m-2 form-select w-auto"
+    [(ngModel)]="currentPage"
+    (change)="cargarPagina($event)"
+  >
+    <option *ngFor="let page of pageNum" [value]="page">{{ page }}</option>
+  </select>
+  <button
+    class="btn btn-dark m-2"
+    (click)="cambiarPagina('next')"
+    [disabled]="!next"
+  >
+    Siguiente
+  </button>
+</div>
+
 <div class="bg-light min-vh-100 py-4" *ngIf="cargando">
   <div class="container">
     <br /><br />

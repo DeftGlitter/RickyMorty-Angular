@@ -15,7 +15,16 @@ import { InicioComponent } from './component/inicio/inicio.component';
 import { DetailLocationComponent } from './component/detail-location/detail-location.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, DetailComponent, HomeComponent, EpisodiosComponent, LocationsComponent, InicioComponent, DetailLocationComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    DetailComponent,
+    HomeComponent,
+    EpisodiosComponent,
+    LocationsComponent,
+    InicioComponent,
+    DetailLocationComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

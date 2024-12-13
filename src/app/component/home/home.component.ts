@@ -9,7 +9,11 @@ import { RestService } from 'src/app/service/rest.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private restService: RestService, private router: Router) {}
+  constructor(
+    private restService: RestService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   cargando: Boolean = false;
   personajes: Result[] = [];
@@ -56,13 +60,30 @@ export class HomeComponent implements OnInit {
   cargarPagina(event: any): void {
     const selectedPage = event.target.value; // Obtén el número de página seleccionado
     const url = `https://rickandmortyapi.com/api/character?page=${selectedPage}`;
-    this.currentPage = selectedPage; // Actualizamos la página actual
+    this.currentPage = +selectedPage; // Actualizamos la página actual
+    this.actualizarURL(); // Actualiza la URL con la página seleccionada
     this.getAll(url); // Carga los datos de la página seleccionada
+  }
+
+  // Actualiza la URL con el número de la página actual
+  actualizarURL(): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: this.currentPage },
+      queryParamsHandling: 'merge', // Mantiene otros parámetros de la URL
+    });
   }
   ngOnInit(): void {
     setTimeout(() => {
       this.cargando = true;
-      this.getAll('https://rickandmortyapi.com/api/character'); // Aquí simula obtener datos
+      this.route.queryParams.subscribe((response) => {
+        const url = response['myUrl'];
+        if (url) {
+          this.getAll(url);
+        } else {
+          this.getAll('https://rickandmortyapi.com/api/character'); // Aquí simula obtener datos
+        }
+      });
     }, 1500); // Tiempo en milisegundos (3 segundos)
   }
 }

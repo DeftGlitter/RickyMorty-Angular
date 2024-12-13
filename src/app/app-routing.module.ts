@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'location', component: LocationsComponent },
   { path: 'detailLocation', component: DetailLocationComponent },
   // { path: 'login', component:  },
-  // { path: '**', component: ErrorPersonalizadoComponent },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

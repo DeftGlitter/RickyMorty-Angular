@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
   pageNum: number[] = [];
   currentPage: number = 1;
 
+  public filtroNombre: string | null = null; // Indica si hay un filtro activo en la busqueda por nombre
+
   getAll(url: any) {
     this.restService.getAll(url).subscribe((response: IPersonajes) => {
       this.personajes = response.results;
@@ -41,6 +43,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['detail'], { queryParams: { url } });
   }
 
+  //Botones prev and next
   cambiarPagina(direction: string): void {
     let url = '';
 
@@ -57,12 +60,32 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  //seleccionar pagina
   cargarPagina(event: any): void {
-    const selectedPage = event.target.value; // Obtén el número de página seleccionado
-    const url = `https://rickandmortyapi.com/api/character?page=${selectedPage}`;
-    this.currentPage = +selectedPage; // Actualizamos la página actual
-    this.actualizarURL(); // Actualiza la URL con la página seleccionada
-    this.getAll(url); // Carga los datos de la página seleccionada
+    // const selectedPage = event.target.value; // Obtén el número de página seleccionado
+    // const url = `https://rickandmortyapi.com/api/character?page=${selectedPage}`;
+    // this.currentPage = +selectedPage; // Actualizamos la página actual
+    // this.actualizarURL(); // Actualiza la URL con la página seleccionada
+    // this.getAll(url); // Carga los datos de la página seleccionada
+    const selectedPage = event.target.value; // Obtén la página seleccionada
+
+    let url = '';
+    if (this.filtroNombre) {
+      // Si hay filtro de búsqueda, incluye el filtro en la URL
+      url = `https://rickandmortyapi.com/api/character?name=${this.filtroNombre}&page=${selectedPage}`;
+    } else {
+      // Si no hay filtro, usa la URL general
+      url = `https://rickandmortyapi.com/api/character?page=${selectedPage}`;
+    }
+
+    this.currentPage = selectedPage; // Actualiza el número de página actual
+    this.getAll(url); // Llama al método para cargar los datos
+  }
+
+  // Método auxiliar para extraer el nombre del filtro desde la URL
+  private getFilterFromUrl(url: string): string | null {
+    const params = new URLSearchParams(url.split('?')[1]); // Obtén los parámetros
+    return params.get('name'); // Devuelve el filtro si existe
   }
 
   // Actualiza la URL con el número de la página actual
@@ -73,14 +96,17 @@ export class HomeComponent implements OnInit {
       queryParamsHandling: 'merge', // Mantiene otros parámetros de la URL
     });
   }
+
   ngOnInit(): void {
     setTimeout(() => {
       this.cargando = true;
       this.route.queryParams.subscribe((response) => {
         const url = response['myUrl'];
         if (url) {
+          this.filtroNombre = this.getFilterFromUrl(url); // Extrae el filtro de la URL
           this.getAll(url);
         } else {
+          this.filtroNombre = null; // Reinicia el filtro si no hay búsqueda
           this.getAll('https://rickandmortyapi.com/api/character'); // Aquí simula obtener datos
         }
       });
